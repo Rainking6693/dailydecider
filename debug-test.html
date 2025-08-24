@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Decider Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .error { color: red; }
+        .success { color: green; }
+        .test-button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Daily Decider Debug Test</h1>
+    
+    <div class="test-section">
+        <h2>1. JavaScript Loading Test</h2>
+        <div id="js-status">Testing...</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Compliment Engine Test</h2>
+        <button class="test-button" onclick="testComplimentEngine()">Test Compliment Engine</button>
+        <div id="compliment-status">Ready to test</div>
+        <div id="compliment-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. PayPal Button Test</h2>
+        <div id="paypal-status">Testing PayPal buttons...</div>
+        <form action="https://www.paypal.com/donate" method="post" target="_blank">
+            <input type="hidden" name="hosted_button_id" value="6FDKVBHKA54R2" />
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="Test PayPal Button" alt="Test PayPal button" />
+        </form>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. Decision Engine Test</h2>
+        <button class="test-button" onclick="testDecisionEngine()">Test Decision Engine</button>
+        <div id="decision-status">Ready to test</div>
+        <div id="decision-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>5. Console Errors</h2>
+        <div id="console-errors">Monitoring console...</div>
+    </div>
+
+    <script>
+        console.log("🔧 Debug test page loaded");
+        
+        // Store original console.error to capture errors
+        const originalError = console.error;
+        let errorCount = 0;
+        
+        console.error = function(...args) {
+            errorCount++;
+            document.getElementById('console-errors').innerHTML += `<div class="error">Error ${errorCount}: ${args.join(' ')}</div>`;
+            originalError.apply(console, args);
+        };
+        
+        // Test JavaScript loading
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("🚀 DOM loaded, testing dependencies...");
+            
+            let jsStatus = '';
+            
+            if (typeof ComplimentEngine !== 'undefined') {
+                jsStatus += '<div class="success">✓ ComplimentEngine loaded</div>';
+            } else {
+                jsStatus += '<div class="error">✗ ComplimentEngine NOT loaded</div>';
+            }
+            
+            if (typeof AdvancedDecisionEngine !== 'undefined') {
+                jsStatus += '<div class="success">✓ AdvancedDecisionEngine loaded</div>';
+            } else {
+                jsStatus += '<div class="error">✗ AdvancedDecisionEngine NOT loaded</div>';
+            }
+            
+            if (typeof TemporalProcessor !== 'undefined') {
+                jsStatus += '<div class="success">✓ TemporalProcessor loaded</div>';
+            } else {
+                jsStatus += '<div class="error">✗ TemporalProcessor NOT loaded</div>';
+            }
+            
+            if (typeof SentimentAnalyzer !== 'undefined') {
+                jsStatus += '<div class="success">✓ SentimentAnalyzer loaded</div>';
+            } else {
+                jsStatus += '<div class="error">✗ SentimentAnalyzer NOT loaded</div>';
+            }
+            
+            document.getElementById('js-status').innerHTML = jsStatus;
+            
+            // Test PayPal SDK
+            if (typeof paypal !== 'undefined') {
+                document.getElementById('paypal-status').innerHTML = '<div class="success">✓ PayPal SDK loaded</div>';
+            } else {
+                document.getElementById('paypal-status').innerHTML = '<div class="error">✗ PayPal SDK NOT loaded</div>';
+            }
+        });
+        
+        async function testComplimentEngine() {
+            const statusDiv = document.getElementById('compliment-status');
+            const resultDiv = document.getElementById('compliment-result');
+            
+            statusDiv.innerHTML = 'Testing compliment engine...';
+            resultDiv.innerHTML = '';
+            
+            try {
+                if (typeof ComplimentEngine === 'undefined') {
+                    throw new Error('ComplimentEngine class not found');
+                }
+                
+                const engine = new ComplimentEngine();
+                console.log("Created ComplimentEngine instance");
+                
+                await engine.initialize();
+                console.log("ComplimentEngine initialized");
+                
+                const compliment = await engine.getPersonalizedCompliment({
+                    sessionId: 'debug-test',
+                    timestamp: Date.now()
+                });
+                
+                console.log("Compliment generated:", compliment);
+                
+                statusDiv.innerHTML = '<div class="success">✓ Compliment engine working!</div>';
+                resultDiv.innerHTML = `
+                    <div style="border: 1px solid green; padding: 10px; margin: 10px 0;">
+                        <strong>Text:</strong> ${compliment.text}<br>
+                        <strong>Category:</strong> ${compliment.category}<br>
+                        <strong>Sentiment:</strong> ${compliment.sentiment}
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error("Compliment test failed:", error);
+                statusDiv.innerHTML = `<div class="error">✗ Error: ${error.message}</div>`;
+                resultDiv.innerHTML = `<div class="error">Stack: ${error.stack}</div>`;
+            }
+        }
+        
+        async function testDecisionEngine() {
+            const statusDiv = document.getElementById('decision-status');
+            const resultDiv = document.getElementById('decision-result');
+            
+            statusDiv.innerHTML = 'Testing decision engine...';
+            resultDiv.innerHTML = '';
+            
+            try {
+                if (typeof AdvancedDecisionEngine === 'undefined') {
+                    throw new Error('AdvancedDecisionEngine class not found');
+                }
+                
+                const engine = new AdvancedDecisionEngine();
+                console.log("Created AdvancedDecisionEngine instance");
+                
+                const result = await engine.makeDecision(
+                    "Should I test this decision engine?",
+                    ["Yes", "No"],
+                    { sessionId: 'debug-test' }
+                );
+                
+                console.log("Decision made:", result);
+                
+                statusDiv.innerHTML = '<div class="success">✓ Decision engine working!</div>';
+                resultDiv.innerHTML = `
+                    <div style="border: 1px solid green; padding: 10px; margin: 10px 0;">
+                        <strong>Decision:</strong> ${result.decision}<br>
+                        <strong>Confidence:</strong> ${result.confidence}<br>
+                        <strong>Reasoning:</strong> ${result.reasoning}
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error("Decision test failed:", error);
+                statusDiv.innerHTML = `<div class="error">✗ Error: ${error.message}</div>`;
+                resultDiv.innerHTML = `<div class="error">Stack: ${error.stack}</div>`;
+            }
+        }
+        
+        // Monitor for any uncaught errors
+        window.addEventListener('error', function(e) {
+            errorCount++;
+            document.getElementById('console-errors').innerHTML += `<div class="error">Uncaught Error ${errorCount}: ${e.message} at ${e.filename}:${e.lineno}</div>`;
+        });
+        
+        // Test network requests
+        setTimeout(async () => {
+            try {
+                const response = await fetch('/data/compliments.json');
+                if (response.ok) {
+                    console.log("✓ Compliments data accessible");
+                } else {
+                    console.error("✗ Compliments data not accessible:", response.status);
+                }
+            } catch (error) {
+                console.error("✗ Error fetching compliments data:", error);
+            }
+        }, 1000);
+    </script>
+    
+    <!-- Load the same scripts as the main site -->
+    <script defer src="/src/sentiment-analyzer.js"></script>
+    <script defer src="/src/temporal-processor.js"></script>
+    <script src="/src/pattern-matcher.js"></script>
+    <script src="/src/decision-engine.js"></script>
+    <script src="/src/compliment-engine.js"></script>
+    <script src="/src/analytics.js"></script>
+    
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AfgctsKt-KBKCu3w2MYvAzQCzY8Tc9cqe3Hm7xGkXCgvG1hBsf8NhYLOMJ0FHSB3FDu9a5c6R7fKPJaQ&currency=USD"></script>
+</body>
+</html>

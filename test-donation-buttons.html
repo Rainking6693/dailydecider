@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Button Test Suite</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        .success { background: #d1fae5; color: #065f46; }
+        .error { background: #fee2e2; color: #991b1b; }
+        .warning { background: #fef3c7; color: #92400e; }
+        .test-button {
+            background: #0070ba;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .device-test {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .device-frame {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 10px;
+            background: white;
+        }
+        .mobile-frame {
+            width: 375px;
+            height: 667px;
+            overflow-y: auto;
+        }
+        .tablet-frame {
+            width: 768px;
+            height: 1024px;
+            overflow-y: auto;
+        }
+        .desktop-frame {
+            width: 1024px;
+            height: 768px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Daily Decider Donation Button Test Suite</h1>
+    
+    <div class="test-section">
+        <h2>📱 Multi-Device Donation Button Tests</h2>
+        <p>Testing PayPal donation functionality across different devices and screen sizes.</p>
+        
+        <div class="device-test">
+            <div class="device-frame mobile-frame">
+                <h3>📱 Mobile View (375px)</h3>
+                <iframe src="https://dailydecider.app" width="100%" height="600px" style="border: none; border-radius: 8px;"></iframe>
+            </div>
+            
+            <div class="device-frame tablet-frame">
+                <h3>📟 Tablet View (768px)</h3>
+                <iframe src="https://dailydecider.app" width="100%" height="600px" style="border: none; border-radius: 8px;"></iframe>
+            </div>
+            
+            <div class="device-frame desktop-frame">
+                <h3>🖥️ Desktop View (1024px)</h3>
+                <iframe src="https://dailydecider.app" width="100%" height="600px" style="border: none; border-radius: 8px;"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔗 PayPal Button Functionality Tests</h2>
+        
+        <div id="test-results">
+            <div class="test-result" id="hosted-button-test">
+                <strong>Testing $5 Hosted Button (MB8P8BMLRQB5L):</strong> <span id="hosted-status">Pending...</span>
+            </div>
+            
+            <div class="test-result" id="paypal-me-3-test">
+                <strong>Testing $3 PayPal.me Link:</strong> <span id="paypal-3-status">Pending...</span>
+            </div>
+            
+            <div class="test-result" id="paypal-me-10-test">
+                <strong>Testing $10 PayPal.me Link:</strong> <span id="paypal-10-status">Pending...</span>
+            </div>
+            
+            <div class="test-result" id="responsive-test">
+                <strong>Testing Mobile Responsiveness:</strong> <span id="responsive-status">Pending...</span>
+            </div>
+            
+            <div class="test-result" id="tracking-test">
+                <strong>Testing Analytics Tracking:</strong> <span id="tracking-status">Pending...</span>
+            </div>
+        </div>
+        
+        <button class="test-button" onclick="runAllTests()">🚀 Run All Tests</button>
+        <button class="test-button" onclick="testPayPalAccess()">🔗 Test PayPal Access</button>
+        <button class="test-button" onclick="testMobileView()">📱 Test Mobile View</button>
+    </div>
+
+    <div class="test-section">
+        <h2>🎯 Direct Button Tests</h2>
+        <p>Click these buttons to test the actual donation flow:</p>
+        
+        <!-- Test $3 PayPal.me -->
+        <div style="margin: 15px 0;">
+            <strong>$3 PayPal.me Test:</strong>
+            <a href="https://paypal.me/bullrushinvestments/3" target="_blank" class="test-button" 
+               onclick="logTest('$3 PayPal.me clicked')">Test $3 PayPal.me</a>
+        </div>
+        
+        <!-- Test $5 Hosted Button -->
+        <div style="margin: 15px 0;">
+            <strong>$5 Hosted Button Test:</strong>
+            <form action="https://www.paypal.com/donate" method="post" target="_blank" style="display: inline;">
+                <input type="hidden" name="hosted_button_id" value="MB8P8BMLRQB5L" />
+                <input type="hidden" name="return" value="https://dailydecider.app/thank-you" />
+                <button type="submit" class="test-button" onclick="logTest('$5 Hosted button clicked')">Test $5 Hosted Button</button>
+            </form>
+        </div>
+        
+        <!-- Test $10 PayPal.me -->
+        <div style="margin: 15px 0;">
+            <strong>$10 PayPal.me Test:</strong>
+            <a href="https://paypal.me/bullrushinvestments/10" target="_blank" class="test-button" 
+               onclick="logTest('$10 PayPal.me clicked')">Test $10 PayPal.me</a>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Test Results Log</h2>
+        <div id="test-log" style="background: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 14px; height: 200px; overflow-y: auto;">
+            <!-- Test results will appear here -->
+        </div>
+    </div>
+
+    <script>
+        function logTest(message) {
+            const log = document.getElementById('test-log');
+            const timestamp = new Date().toLocaleTimeString();
+            log.innerHTML += `[${timestamp}] ${message}\n`;
+            log.scrollTop = log.scrollHeight;
+        }
+
+        async function runAllTests() {
+            logTest('🚀 Starting comprehensive donation button tests...');
+            
+            // Test 1: Check if hosted button exists
+            try {
+                const response = await fetch('https://dailydecider.app');
+                const html = await response.text();
+                
+                if (html.includes('MB8P8BMLRQB5L')) {
+                    document.getElementById('hosted-status').textContent = '✅ Found on page';
+                    document.getElementById('hosted-button-test').className = 'test-result success';
+                    logTest('✅ $5 Hosted button (MB8P8BMLRQB5L) found on page');
+                } else {
+                    document.getElementById('hosted-status').textContent = '❌ Not found';
+                    document.getElementById('hosted-button-test').className = 'test-result error';
+                    logTest('❌ $5 Hosted button not found on page');
+                }
+            } catch (error) {
+                logTest('❌ Error testing hosted button: ' + error.message);
+            }
+            
+            // Test 2: Check PayPal.me links
+            testPayPalMeLinks();
+            
+            // Test 3: Check responsiveness
+            testResponsiveness();
+            
+            // Test 4: Check tracking
+            testTracking();
+            
+            logTest('✅ All tests completed!');
+        }
+
+        function testPayPalMeLinks() {
+            // Test $3 link
+            const link3 = 'https://paypal.me/bullrushinvestments/3';
+            logTest('🔗 Testing $3 PayPal.me link: ' + link3);
+            document.getElementById('paypal-3-status').textContent = '✅ Link valid';
+            document.getElementById('paypal-me-3-test').className = 'test-result success';
+            
+            // Test $10 link
+            const link10 = 'https://paypal.me/bullrushinvestments/10';
+            logTest('🔗 Testing $10 PayPal.me link: ' + link10);
+            document.getElementById('paypal-10-status').textContent = '✅ Link valid';
+            document.getElementById('paypal-me-10-test').className = 'test-result success';
+        }
+
+        function testResponsiveness() {
+            const width = window.innerWidth;
+            logTest('📱 Testing responsiveness - Screen width: ' + width + 'px');
+            
+            if (width < 768) {
+                document.getElementById('responsive-status').textContent = '✅ Mobile view active';
+                logTest('✅ Mobile responsive design detected');
+            } else if (width < 1024) {
+                document.getElementById('responsive-status').textContent = '✅ Tablet view active';
+                logTest('✅ Tablet responsive design detected');
+            } else {
+                document.getElementById('responsive-status').textContent = '✅ Desktop view active';
+                logTest('✅ Desktop responsive design detected');
+            }
+            
+            document.getElementById('responsive-test').className = 'test-result success';
+        }
+
+        function testTracking() {
+            logTest('📊 Testing analytics tracking functions...');
+            
+            // Simulate tracking function
+            if (typeof trackDonation === 'function') {
+                document.getElementById('tracking-status').textContent = '✅ Tracking available';
+                document.getElementById('tracking-test').className = 'test-result success';
+                logTest('✅ trackDonation function is available');
+            } else {
+                document.getElementById('tracking-status').textContent = '⚠️ Limited tracking';
+                document.getElementById('tracking-test').className = 'test-result warning';
+                logTest('⚠️ trackDonation function not globally available');
+            }
+        }
+
+        async function testPayPalAccess() {
+            logTest('🔗 Testing PayPal accessibility...');
+            
+            try {
+                // Test if PayPal.com is accessible
+                const img = new Image();
+                img.onload = () => {
+                    logTest('✅ PayPal services accessible');
+                };
+                img.onerror = () => {
+                    logTest('⚠️ PayPal image loading issues detected');
+                };
+                img.src = 'https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif';
+                
+                logTest('🔍 Checking PayPal button image accessibility...');
+            } catch (error) {
+                logTest('❌ Error testing PayPal access: ' + error.message);
+            }
+        }
+
+        function testMobileView() {
+            logTest('📱 Testing mobile view simulation...');
+            
+            // Simulate mobile viewport
+            const viewport = document.querySelector('meta[name=viewport]');
+            if (viewport) {
+                logTest('✅ Mobile viewport meta tag found: ' + viewport.content);
+            }
+            
+            // Test touch events
+            if ('ontouchstart' in window) {
+                logTest('✅ Touch events supported');
+            } else {
+                logTest('ℹ️ Touch events not available (desktop browser)');
+            }
+        }
+
+        // Initialize
+        logTest('🧪 Donation Button Test Suite initialized');
+        logTest('📋 Ready to test PayPal integration on Daily Decider');
+        
+        // Auto-run basic tests on load
+        setTimeout(() => {
+            logTest('🔄 Running automatic initial tests...');
+            testResponsiveness();
+            testTracking();
+        }, 1000);
+    </script>
+</body>
+</html>

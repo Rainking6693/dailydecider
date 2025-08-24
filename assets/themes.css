@@ -1,0 +1,532 @@
+/* Daily Decider - Advanced Theme System */
+/* Automatic dark mode switching & seasonal themes for maximum engagement */
+
+/* Theme Detection Variables */
+:root {
+  --dd-theme-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --dd-auto-theme-enabled: 1;
+  --dd-seasonal-theme-enabled: 1;
+}
+
+/* Base Light Theme (Default) */
+:root,
+[data-theme="light"] {
+  /* Core Colors */
+  --dd-bg-primary: #ffffff;
+  --dd-bg-secondary: #f8fafc;
+  --dd-bg-tertiary: #f1f5f9;
+  --dd-bg-elevated: #ffffff;
+  --dd-bg-overlay: rgba(255, 255, 255, 0.95);
+  
+  /* Text Colors */
+  --dd-text-primary: #1e293b;
+  --dd-text-secondary: #64748b;
+  --dd-text-tertiary: #94a3b8;
+  --dd-text-inverse: #ffffff;
+  
+  /* Border Colors */
+  --dd-border-primary: #e2e8f0;
+  --dd-border-secondary: #cbd5e1;
+  --dd-border-focus: #6366f1;
+  
+  /* Interactive States */
+  --dd-interactive-hover: rgba(99, 102, 241, 0.05);
+  --dd-interactive-active: rgba(99, 102, 241, 0.1);
+  --dd-interactive-disabled: #f1f5f9;
+  
+  /* Shadow System */
+  --dd-shadow-color: rgba(15, 23, 42, 0.1);
+  --dd-shadow-sm: 0 1px 2px var(--dd-shadow-color);
+  --dd-shadow-md: 0 4px 6px -1px var(--dd-shadow-color);
+  --dd-shadow-lg: 0 10px 15px -3px var(--dd-shadow-color);
+  --dd-shadow-xl: 0 20px 25px -5px var(--dd-shadow-color);
+  
+  /* Glass Effects */
+  --dd-glass-bg: rgba(255, 255, 255, 0.8);
+  --dd-glass-border: rgba(255, 255, 255, 0.2);
+  --dd-glass-backdrop: blur(20px);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  /* Core Colors */
+  --dd-bg-primary: #0f172a;
+  --dd-bg-secondary: #1e293b;
+  --dd-bg-tertiary: #334155;
+  --dd-bg-elevated: #1e293b;
+  --dd-bg-overlay: rgba(15, 23, 42, 0.95);
+  
+  /* Text Colors */
+  --dd-text-primary: #f1f5f9;
+  --dd-text-secondary: #cbd5e1;
+  --dd-text-tertiary: #94a3b8;
+  --dd-text-inverse: #0f172a;
+  
+  /* Border Colors */
+  --dd-border-primary: #334155;
+  --dd-border-secondary: #475569;
+  --dd-border-focus: #a5b4fc;
+  
+  /* Interactive States */
+  --dd-interactive-hover: rgba(165, 180, 252, 0.1);
+  --dd-interactive-active: rgba(165, 180, 252, 0.2);
+  --dd-interactive-disabled: #334155;
+  
+  /* Shadow System */
+  --dd-shadow-color: rgba(0, 0, 0, 0.3);
+  --dd-shadow-sm: 0 1px 2px var(--dd-shadow-color);
+  --dd-shadow-md: 0 4px 6px -1px var(--dd-shadow-color);
+  --dd-shadow-lg: 0 10px 15px -3px var(--dd-shadow-color);
+  --dd-shadow-xl: 0 20px 25px -5px var(--dd-shadow-color);
+  
+  /* Glass Effects */
+  --dd-glass-bg: rgba(15, 23, 42, 0.8);
+  --dd-glass-border: rgba(255, 255, 255, 0.1);
+  --dd-glass-backdrop: blur(20px);
+  
+  /* Enhanced Glows for Dark Mode */
+  --dd-primary-glow: rgba(99, 102, 241, 0.4);
+  --dd-success-glow: rgba(16, 185, 129, 0.3);
+  --dd-warning-glow: rgba(245, 158, 11, 0.3);
+  --dd-error-glow: rgba(239, 68, 68, 0.3);
+}
+
+/* Auto Dark Mode (System Preference) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /* Core Colors */
+    --dd-bg-primary: #0f172a;
+    --dd-bg-secondary: #1e293b;
+    --dd-bg-tertiary: #334155;
+    --dd-bg-elevated: #1e293b;
+    --dd-bg-overlay: rgba(15, 23, 42, 0.95);
+    
+    /* Text Colors */
+    --dd-text-primary: #f1f5f9;
+    --dd-text-secondary: #cbd5e1;
+    --dd-text-tertiary: #94a3b8;
+    --dd-text-inverse: #0f172a;
+    
+    /* Border Colors */
+    --dd-border-primary: #334155;
+    --dd-border-secondary: #475569;
+    --dd-border-focus: #a5b4fc;
+    
+    /* Interactive States */
+    --dd-interactive-hover: rgba(165, 180, 252, 0.1);
+    --dd-interactive-active: rgba(165, 180, 252, 0.2);
+    --dd-interactive-disabled: #334155;
+    
+    /* Shadow System */
+    --dd-shadow-color: rgba(0, 0, 0, 0.3);
+    
+    /* Glass Effects */
+    --dd-glass-bg: rgba(15, 23, 42, 0.8);
+    --dd-glass-border: rgba(255, 255, 255, 0.1);
+    
+    /* Enhanced Glows */
+    --dd-primary-glow: rgba(99, 102, 241, 0.4);
+  }
+}
+
+/* Seasonal Themes */
+
+/* Spring Theme */
+[data-season="spring"] {
+  --dd-primary: #10b981;
+  --dd-primary-dark: #059669;
+  --dd-primary-light: #6ee7b7;
+  --dd-primary-glow: rgba(16, 185, 129, 0.25);
+  
+  --dd-seasonal-accent: #34d399;
+  --dd-seasonal-bg: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 50%, #ffffff 100%);
+  --dd-seasonal-border: #bbf7d0;
+  --dd-seasonal-text: #065f46;
+  
+  /* Spring-specific animations */
+  --dd-seasonal-animation: dd-spring-bloom 3s ease-in-out infinite;
+}
+
+[data-season="spring"] body {
+  background: var(--dd-seasonal-bg);
+}
+
+[data-season="spring"] .dd-seasonal-element {
+  border-color: var(--dd-seasonal-border);
+  color: var(--dd-seasonal-text);
+  animation: var(--dd-seasonal-animation);
+}
+
+/* Summer Theme */
+[data-season="summer"] {
+  --dd-primary: #f59e0b;
+  --dd-primary-dark: #d97706;
+  --dd-primary-light: #fcd34d;
+  --dd-primary-glow: rgba(245, 158, 11, 0.25);
+  
+  --dd-seasonal-accent: #fbbf24;
+  --dd-seasonal-bg: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #ffffff 100%);
+  --dd-seasonal-border: #fed7aa;
+  --dd-seasonal-text: #92400e;
+  
+  /* Summer glow effect */
+  --dd-seasonal-animation: dd-summer-glow 4s ease-in-out infinite;
+}
+
+[data-season="summer"] body {
+  background: var(--dd-seasonal-bg);
+}
+
+[data-season="summer"] .dd-seasonal-element {
+  border-color: var(--dd-seasonal-border);
+  color: var(--dd-seasonal-text);
+  animation: var(--dd-seasonal-animation);
+}
+
+/* Autumn Theme */
+[data-season="autumn"] {
+  --dd-primary: #ea580c;
+  --dd-primary-dark: #c2410c;
+  --dd-primary-light: #fb923c;
+  --dd-primary-glow: rgba(234, 88, 12, 0.25);
+  
+  --dd-seasonal-accent: #f97316;
+  --dd-seasonal-bg: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #ffffff 100%);
+  --dd-seasonal-border: #fed7aa;
+  --dd-seasonal-text: #9a3412;
+  
+  /* Autumn drift effect */
+  --dd-seasonal-animation: dd-autumn-drift 5s ease-in-out infinite;
+}
+
+[data-season="autumn"] body {
+  background: var(--dd-seasonal-bg);
+}
+
+[data-season="autumn"] .dd-seasonal-element {
+  border-color: var(--dd-seasonal-border);
+  color: var(--dd-seasonal-text);
+  animation: var(--dd-seasonal-animation);
+}
+
+/* Winter Theme */
+[data-season="winter"] {
+  --dd-primary: #0ea5e9;
+  --dd-primary-dark: #0284c7;
+  --dd-primary-light: #7dd3fc;
+  --dd-primary-glow: rgba(14, 165, 233, 0.25);
+  
+  --dd-seasonal-accent: #38bdf8;
+  --dd-seasonal-bg: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #ffffff 100%);
+  --dd-seasonal-border: #bae6fd;
+  --dd-seasonal-text: #0c4a6e;
+  
+  /* Winter frost effect */
+  --dd-seasonal-animation: dd-winter-frost 6s ease-in-out infinite;
+}
+
+[data-season="winter"] body {
+  background: var(--dd-seasonal-bg);
+}
+
+[data-season="winter"] .dd-seasonal-element {
+  border-color: var(--dd-seasonal-border);
+  color: var(--dd-seasonal-text);
+  animation: var(--dd-seasonal-animation);
+}
+
+/* Seasonal Dark Mode Adaptations */
+[data-theme="dark"][data-season="spring"] {
+  --dd-seasonal-bg: linear-gradient(135deg, #0f1f16 0%, #1a2e1a 50%, #0f172a 100%);
+  --dd-seasonal-border: #166534;
+  --dd-seasonal-text: #6ee7b7;
+}
+
+[data-theme="dark"][data-season="summer"] {
+  --dd-seasonal-bg: linear-gradient(135deg, #1f1611 0%, #2e1a0f 50%, #0f172a 100%);
+  --dd-seasonal-border: #d97706;
+  --dd-seasonal-text: #fcd34d;
+}
+
+[data-theme="dark"][data-season="autumn"] {
+  --dd-seasonal-bg: linear-gradient(135deg, #1f1108 0%, #2e1b0f 50%, #0f172a 100%);
+  --dd-seasonal-border: #c2410c;
+  --dd-seasonal-text: #fb923c;
+}
+
+[data-theme="dark"][data-season="winter"] {
+  --dd-seasonal-bg: linear-gradient(135deg, #0f1419 0%, #1a2329 50%, #0f172a 100%);
+  --dd-seasonal-border: #0284c7;
+  --dd-seasonal-text: #7dd3fc;
+}
+
+/* Time-Based Theme Adjustments */
+[data-time="morning"] {
+  --dd-ambient-glow: rgba(245, 158, 11, 0.1);
+  --dd-ambient-border: rgba(245, 158, 11, 0.2);
+  filter: brightness(1.02) saturate(1.05);
+}
+
+[data-time="afternoon"] {
+  --dd-ambient-glow: rgba(16, 185, 129, 0.1);
+  --dd-ambient-border: rgba(16, 185, 129, 0.2);
+  filter: brightness(1) saturate(1.1);
+}
+
+[data-time="evening"] {
+  --dd-ambient-glow: rgba(139, 92, 246, 0.1);
+  --dd-ambient-border: rgba(139, 92, 246, 0.2);
+  filter: brightness(0.98) saturate(0.95);
+}
+
+[data-time="night"] {
+  --dd-ambient-glow: rgba(99, 102, 241, 0.1);
+  --dd-ambient-border: rgba(99, 102, 241, 0.2);
+  filter: brightness(0.95) saturate(0.9);
+}
+
+/* Theme Transition Elements */
+.dd-theme-aware {
+  background: var(--dd-bg-primary);
+  color: var(--dd-text-primary);
+  border-color: var(--dd-border-primary);
+  transition: var(--dd-theme-transition);
+}
+
+.dd-theme-elevated {
+  background: var(--dd-bg-elevated);
+  box-shadow: var(--dd-shadow-lg);
+  transition: var(--dd-theme-transition);
+}
+
+.dd-theme-glass {
+  background: var(--dd-glass-bg);
+  border: 1px solid var(--dd-glass-border);
+  backdrop-filter: var(--dd-glass-backdrop);
+  transition: var(--dd-theme-transition);
+}
+
+.dd-theme-interactive {
+  transition: var(--dd-theme-transition);
+}
+
+.dd-theme-interactive:hover {
+  background: var(--dd-interactive-hover);
+}
+
+.dd-theme-interactive:active {
+  background: var(--dd-interactive-active);
+}
+
+/* Theme Toggle Button */
+.dd-theme-toggle {
+  position: fixed;
+  top: var(--dd-space-6);
+  right: var(--dd-space-6);
+  width: 48px;
+  height: 48px;
+  background: var(--dd-bg-elevated);
+  border: 1px solid var(--dd-border-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--dd-theme-transition);
+  z-index: var(--dd-z-40);
+  box-shadow: var(--dd-shadow-lg);
+}
+
+.dd-theme-toggle:hover {
+  background: var(--dd-interactive-hover);
+  transform: scale(1.05);
+  box-shadow: var(--dd-shadow-xl);
+}
+
+.dd-theme-toggle-icon {
+  width: 20px;
+  height: 20px;
+  transition: var(--dd-theme-transition);
+}
+
+/* Theme Toggle Icons */
+.dd-theme-toggle[data-theme="light"] .dd-icon-sun {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+.dd-theme-toggle[data-theme="light"] .dd-icon-moon {
+  opacity: 0;
+  transform: rotate(180deg);
+}
+
+.dd-theme-toggle[data-theme="dark"] .dd-icon-sun {
+  opacity: 0;
+  transform: rotate(-180deg);
+}
+
+.dd-theme-toggle[data-theme="dark"] .dd-icon-moon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+/* Seasonal Indicator */
+.dd-seasonal-indicator {
+  position: fixed;
+  bottom: var(--dd-space-6);
+  right: var(--dd-space-6);
+  padding: var(--dd-space-2) var(--dd-space-3);
+  background: var(--dd-glass-bg);
+  border: 1px solid var(--dd-glass-border);
+  border-radius: var(--dd-radius-full);
+  backdrop-filter: var(--dd-glass-backdrop);
+  display: flex;
+  align-items: center;
+  gap: var(--dd-space-2);
+  font-size: var(--dd-text-xs);
+  font-weight: 500;
+  color: var(--dd-text-secondary);
+  z-index: var(--dd-z-30);
+  transition: var(--dd-theme-transition);
+  opacity: 0.7;
+}
+
+.dd-seasonal-indicator:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.dd-seasonal-icon {
+  font-size: var(--dd-text-sm);
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --dd-bg-primary: #ffffff;
+    --dd-bg-secondary: #ffffff;
+    --dd-text-primary: #000000;
+    --dd-text-secondary: #000000;
+    --dd-border-primary: #000000;
+    --dd-primary: #0000ff;
+    --dd-shadow-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  [data-theme="dark"] {
+    --dd-bg-primary: #000000;
+    --dd-bg-secondary: #000000;
+    --dd-text-primary: #ffffff;
+    --dd-text-secondary: #ffffff;
+    --dd-border-primary: #ffffff;
+    --dd-primary: #00ffff;
+  }
+}
+
+/* Print Mode Theme */
+@media print {
+  :root,
+  [data-theme="dark"] {
+    --dd-bg-primary: #ffffff !important;
+    --dd-bg-secondary: #ffffff !important;
+    --dd-bg-elevated: #ffffff !important;
+    --dd-text-primary: #000000 !important;
+    --dd-text-secondary: #333333 !important;
+    --dd-border-primary: #000000 !important;
+    --dd-primary: #000000 !important;
+    --dd-shadow-color: transparent !important;
+  }
+  
+  .dd-theme-toggle,
+  .dd-seasonal-indicator {
+    display: none !important;
+  }
+}
+
+/* Seasonal Animation Keyframes */
+@keyframes dd-spring-bloom {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  33% {
+    transform: scale(1.02) rotate(1deg);
+    filter: hue-rotate(5deg) brightness(1.05);
+  }
+  66% {
+    transform: scale(0.98) rotate(-1deg);
+    filter: hue-rotate(-5deg) brightness(0.95);
+  }
+}
+
+@keyframes dd-summer-glow {
+  0%, 100% {
+    filter: brightness(1) saturate(1) drop-shadow(0 0 5px rgba(245, 158, 11, 0.2));
+  }
+  50% {
+    filter: brightness(1.1) saturate(1.2) drop-shadow(0 0 15px rgba(245, 158, 11, 0.4));
+  }
+}
+
+@keyframes dd-autumn-drift {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-1px) rotate(-0.5deg);
+  }
+  50% {
+    transform: translateX(0) rotate(0deg);
+  }
+  75% {
+    transform: translateX(1px) rotate(0.5deg);
+  }
+}
+
+@keyframes dd-winter-frost {
+  0%, 100% {
+    filter: blur(0px) brightness(1) contrast(1);
+  }
+  50% {
+    filter: blur(0.2px) brightness(1.05) contrast(1.1);
+  }
+}
+
+/* Reduced Motion Adaptations */
+@media (prefers-reduced-motion: reduce) {
+  .dd-seasonal-element {
+    animation: none !important;
+  }
+  
+  [data-time] {
+    filter: none !important;
+  }
+  
+  .dd-theme-toggle,
+  .dd-theme-aware,
+  .dd-theme-elevated,
+  .dd-theme-glass,
+  .dd-theme-interactive {
+    transition: none !important;
+  }
+}
+
+/* Mobile Theme Adaptations */
+@media (max-width: 768px) {
+  .dd-theme-toggle {
+    top: var(--dd-space-4);
+    right: var(--dd-space-4);
+    width: 40px;
+    height: 40px;
+  }
+  
+  .dd-seasonal-indicator {
+    bottom: var(--dd-space-4);
+    right: var(--dd-space-4);
+    padding: var(--dd-space-1) var(--dd-space-2);
+    font-size: 10px;
+  }
+  
+  .dd-seasonal-icon {
+    font-size: 12px;
+  }
+}

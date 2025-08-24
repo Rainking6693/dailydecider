@@ -1,0 +1,561 @@
+/* Daily Decider - Psychological Design Features */
+/* Science-backed visual elements for decision confidence and habit formation */
+
+/* Color Psychology for Decision-Making */
+:root {
+  /* Confidence Boosting Colors */
+  --dd-confidence-boost: #f59e0b;    /* Warmth, optimism, energy */
+  --dd-clarity-enhancer: #0ea5e9;    /* Trust, clarity, focus */
+  --dd-calm-decision: #14b8a6;       /* Balance, growth, stability */
+  --dd-creative-spark: #8b5cf6;      /* Creativity, imagination, innovation */
+  --dd-success-affirmation: #10b981; /* Achievement, growth, positive outcome */
+  
+  /* Emotional State Colors */
+  --dd-morning-serenity: #bae6fd;    /* Peaceful start, clear thinking */
+  --dd-afternoon-energy: #fcd34d;    /* Active decision-making, momentum */
+  --dd-evening-reflection: #c4b5fd;  /* Contemplation, wisdom, introspection */
+  --dd-night-calm: #a7f3d0;          /* Rest, peace, gentle decisions */
+  
+  /* Stress Reduction Colors */
+  --dd-anxiety-relief: #e0e7ff;      /* Calming, reduces overwhelm */
+  --dd-overwhelm-reducer: #f0fdf4;   /* Gentle, natural, grounding */
+  --dd-focus-enhancer: #fef3c7;      /* Attention, clarity, concentration */
+}
+
+/* Visual Hierarchy for Habit Formation */
+.dd-hierarchy-primary {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--dd-primary);
+  text-align: center;
+  margin-bottom: var(--dd-space-6);
+  position: relative;
+}
+
+.dd-hierarchy-primary::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--dd-primary) 0%, var(--dd-clarity-enhancer) 100%);
+  border-radius: 2px;
+}
+
+.dd-hierarchy-secondary {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  color: var(--dd-neutral-800);
+  margin-bottom: var(--dd-space-4);
+  line-height: 1.4;
+}
+
+.dd-hierarchy-body {
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  font-weight: 400;
+  color: var(--dd-neutral-600);
+  line-height: 1.7;
+  max-width: 65ch;
+  margin: 0 auto;
+}
+
+/* Dopamine-Hit Visual Feedback System */
+.dd-dopamine-trigger {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dd-dopamine-trigger::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(
+    circle,
+    rgba(245, 158, 11, 0.3) 0%,
+    rgba(245, 158, 11, 0.1) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: none;
+}
+
+.dd-dopamine-trigger:active::before,
+.dd-dopamine-trigger.dd-triggered::before {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(16, 185, 129, 0.4) 0%,
+    rgba(16, 185, 129, 0.2) 40%,
+    transparent 70%
+  );
+}
+
+.dd-dopamine-trigger:active {
+  transform: scale(0.98);
+}
+
+/* Success State Animation */
+.dd-success-celebration {
+  position: relative;
+}
+
+.dd-success-celebration::after {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.5rem;
+  opacity: 0;
+  transform: scale(0) rotate(0deg);
+  animation: dd-success-sparkle 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes dd-success-sparkle {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+/* Progress Indicators for Daily Use */
+.dd-habit-tracker {
+  display: flex;
+  gap: var(--dd-space-2);
+  justify-content: center;
+  margin: var(--dd-space-6) 0;
+  padding: var(--dd-space-4);
+  background: var(--dd-neutral-50);
+  border-radius: var(--dd-radius-xl);
+  border: 1px solid var(--dd-neutral-200);
+}
+
+.dd-habit-day {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--dd-neutral-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--dd-text-xs);
+  font-weight: 600;
+  color: var(--dd-neutral-500);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.dd-habit-day.dd-completed {
+  background: var(--dd-success-affirmation);
+  border-color: var(--dd-success-affirmation);
+  color: white;
+  transform: scale(1.1);
+}
+
+.dd-habit-day.dd-current {
+  border-color: var(--dd-primary);
+  background: var(--dd-primary-light);
+  color: var(--dd-primary-dark);
+  animation: dd-pulse-current 2s ease-in-out infinite;
+}
+
+@keyframes dd-pulse-current {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(99, 102, 241, 0);
+  }
+}
+
+.dd-habit-streak {
+  text-align: center;
+  margin-top: var(--dd-space-4);
+}
+
+.dd-habit-streak-number {
+  font-size: var(--dd-text-2xl);
+  font-weight: 800;
+  color: var(--dd-confidence-boost);
+  display: block;
+}
+
+.dd-habit-streak-label {
+  font-size: var(--dd-text-sm);
+  color: var(--dd-neutral-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Calming Morning Aesthetics */
+.dd-morning-mode {
+  background: linear-gradient(
+    135deg,
+    var(--dd-morning-serenity) 0%,
+    rgba(186, 230, 253, 0.3) 50%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(186, 230, 253, 0.3);
+}
+
+.dd-morning-text {
+  color: #0c4a6e;
+  text-shadow: 0 1px 2px rgba(186, 230, 253, 0.3);
+}
+
+.dd-morning-glow {
+  box-shadow: 
+    0 4px 20px rgba(186, 230, 253, 0.2),
+    0 1px 3px rgba(186, 230, 253, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Confidence Building Elements */
+.dd-confidence-booster {
+  position: relative;
+  padding: var(--dd-space-6);
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.1) 0%,
+    rgba(245, 158, 11, 0.05) 100%
+  );
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: var(--dd-radius-xl);
+  margin: var(--dd-space-6) 0;
+}
+
+.dd-confidence-booster::before {
+  content: '💪';
+  position: absolute;
+  top: var(--dd-space-3);
+  right: var(--dd-space-3);
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+.dd-confidence-text {
+  font-weight: 600;
+  color: #92400e;
+  line-height: 1.6;
+}
+
+/* Decision Fatigue Reducer */
+.dd-simple-choice {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--dd-space-4);
+  margin: var(--dd-space-6) 0;
+}
+
+.dd-choice-option {
+  padding: var(--dd-space-6);
+  background: var(--dd-neutral-50);
+  border: 2px solid var(--dd-neutral-200);
+  border-radius: var(--dd-radius-xl);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.dd-choice-option:hover {
+  border-color: var(--dd-primary);
+  background: var(--dd-primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--dd-shadow-lg);
+}
+
+.dd-choice-option.dd-selected {
+  background: var(--dd-primary);
+  border-color: var(--dd-primary-dark);
+  color: white;
+  transform: scale(1.05);
+}
+
+.dd-choice-option::after {
+  content: '';
+  position: absolute;
+  top: var(--dd-space-3);
+  right: var(--dd-space-3);
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.dd-choice-option.dd-selected::after {
+  opacity: 1;
+  background: currentColor;
+  box-shadow: inset 0 0 0 4px var(--dd-primary);
+}
+
+/* Emotional State Indicators */
+.dd-emotion-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--dd-space-3);
+  padding: var(--dd-space-3) var(--dd-space-4);
+  background: var(--dd-neutral-50);
+  border-radius: var(--dd-radius-lg);
+  margin: var(--dd-space-4) 0;
+}
+
+.dd-emotion-icon {
+  font-size: 1.5rem;
+  animation: dd-emotion-pulse 2s ease-in-out infinite;
+}
+
+@keyframes dd-emotion-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.dd-emotion-text {
+  font-size: var(--dd-text-sm);
+  color: var(--dd-neutral-600);
+  font-weight: 500;
+}
+
+.dd-emotion-happy {
+  border-left: 4px solid var(--dd-success-affirmation);
+}
+
+.dd-emotion-calm {
+  border-left: 4px solid var(--dd-calm-decision);
+}
+
+.dd-emotion-focused {
+  border-left: 4px solid var(--dd-clarity-enhancer);
+}
+
+.dd-emotion-creative {
+  border-left: 4px solid var(--dd-creative-spark);
+}
+
+/* Cognitive Load Reduction */
+.dd-scan-friendly {
+  line-height: 1.8;
+  font-size: var(--dd-text-lg);
+  color: var(--dd-neutral-700);
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+.dd-scan-friendly strong {
+  color: var(--dd-primary);
+  font-weight: 600;
+  background: linear-gradient(
+    120deg,
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(99, 102, 241, 0.05) 100%
+  );
+  padding: 0 var(--dd-space-1);
+  border-radius: var(--dd-radius-sm);
+}
+
+.dd-key-point {
+  background: var(--dd-focus-enhancer);
+  border: 1px solid #f59e0b;
+  border-radius: var(--dd-radius-lg);
+  padding: var(--dd-space-4);
+  margin: var(--dd-space-4) 0;
+  position: relative;
+}
+
+.dd-key-point::before {
+  content: '💡';
+  position: absolute;
+  top: var(--dd-space-2);
+  left: var(--dd-space-3);
+  font-size: 1.2rem;
+}
+
+.dd-key-point-text {
+  margin-left: var(--dd-space-8);
+  font-weight: 500;
+  color: #92400e;
+}
+
+/* Time-Based Visual Cues */
+.dd-time-sensitive {
+  border: 2px solid var(--dd-warning);
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.1) 0%,
+    rgba(245, 158, 11, 0.05) 100%
+  );
+  position: relative;
+}
+
+.dd-time-sensitive::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--dd-warning) 0%,
+    var(--dd-error) 100%
+  );
+  animation: dd-time-pulse 2s ease-in-out infinite;
+}
+
+@keyframes dd-time-pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Social Proof Elements */
+.dd-social-proof {
+  display: flex;
+  align-items: center;
+  gap: var(--dd-space-3);
+  padding: var(--dd-space-4);
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--dd-radius-lg);
+  margin: var(--dd-space-4) 0;
+}
+
+.dd-social-proof-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--dd-success-affirmation);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+}
+
+.dd-social-proof-text {
+  flex: 1;
+  color: #059669;
+  font-weight: 500;
+}
+
+/* Accessibility Enhancements */
+.dd-high-contrast {
+  filter: contrast(1.2) saturate(1.1);
+}
+
+.dd-focus-visible:focus-visible {
+  outline: 3px solid var(--dd-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.2);
+}
+
+/* Micro-Feedback System */
+.dd-micro-feedback {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--dd-success-affirmation);
+  color: white;
+  padding: var(--dd-space-3) var(--dd-space-6);
+  border-radius: var(--dd-radius-full);
+  font-weight: 600;
+  z-index: var(--dd-z-notification);
+  animation: dd-micro-feedback-show 2s ease-out;
+}
+
+@keyframes dd-micro-feedback-show {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+/* Dark Mode Psychology Adjustments */
+[data-theme="dark"] .dd-morning-mode {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 64, 175, 0.2) 0%,
+    rgba(30, 64, 175, 0.1) 50%,
+    rgba(15, 23, 42, 0.8) 100%
+  );
+}
+
+[data-theme="dark"] .dd-confidence-booster {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.2) 0%,
+    rgba(245, 158, 11, 0.1) 100%
+  );
+}
+
+[data-theme="dark"] .dd-key-point {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+/* Responsive Psychology */
+@media (max-width: 768px) {
+  .dd-simple-choice {
+    grid-template-columns: 1fr;
+    gap: var(--dd-space-3);
+  }
+  
+  .dd-habit-tracker {
+    gap: var(--dd-space-1);
+  }
+  
+  .dd-habit-day {
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+  }
+  
+  .dd-confidence-booster {
+    padding: var(--dd-space-4);
+  }
+  
+  .dd-hierarchy-primary {
+    margin-bottom: var(--dd-space-4);
+  }
+}

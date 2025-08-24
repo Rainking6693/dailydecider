@@ -1,0 +1,583 @@
+/* Daily Decider - Advanced Animation & Micro-Interaction System */
+/* Psychological dopamine-hit animations for maximum engagement */
+
+/* Animation Variables */
+:root {
+  --dd-ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --dd-ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+  --dd-ease-spring: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --dd-ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --dd-ease-back: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+/* Signature Entrance Animations */
+@keyframes dd-signature-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-5px) scale(1.02);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes dd-logo-breathe {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.3));
+  }
+  50% {
+    transform: scale(1.05) rotate(2deg);
+    filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.5));
+  }
+}
+
+@keyframes dd-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Dopamine-Hit Button Animations */
+.dd-btn-success-burst {
+  position: relative;
+  overflow: hidden;
+}
+
+.dd-btn-success-burst::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.6) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.6s var(--dd-ease-out-cubic);
+}
+
+.dd-btn-success-burst.dd-burst-active::after {
+  width: 200px;
+  height: 200px;
+  opacity: 0;
+}
+
+@keyframes dd-button-press {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(2px) scale(0.98);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dd-button-glow-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 4px 15px rgba(99, 102, 241, 0.2),
+      0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+  50% {
+    box-shadow: 
+      0 6px 25px rgba(99, 102, 241, 0.4),
+      0 0 0 8px rgba(99, 102, 241, 0.1);
+  }
+}
+
+/* Card Hover Transformations */
+@keyframes dd-card-lift {
+  0% {
+    transform: translateY(0) rotateX(0deg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    transform: translateY(-8px) rotateX(5deg);
+    box-shadow: 
+      0 15px 35px rgba(0, 0, 0, 0.15),
+      0 5px 15px rgba(99, 102, 241, 0.1);
+  }
+}
+
+@keyframes dd-card-content-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading State Animations */
+@keyframes dd-skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+@keyframes dd-pulse-glow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes dd-ripple-effect {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Text Animation Effects */
+@keyframes dd-text-rainbow {
+  0% { color: #6366f1; }
+  16.66% { color: #14b8a6; }
+  33.33% { color: #f59e0b; }
+  50% { color: #10b981; }
+  66.66% { color: #8b5cf6; }
+  83.33% { color: #ef4444; }
+  100% { color: #6366f1; }
+}
+
+@keyframes dd-text-type {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes dd-text-glow {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px rgba(99, 102, 241, 0.5),
+      0 0 10px rgba(99, 102, 241, 0.3),
+      0 0 15px rgba(99, 102, 241, 0.1);
+  }
+  50% {
+    text-shadow: 
+      0 0 10px rgba(99, 102, 241, 0.8),
+      0 0 20px rgba(99, 102, 241, 0.6),
+      0 0 30px rgba(99, 102, 241, 0.4);
+  }
+}
+
+/* Progress Bar Animations */
+@keyframes dd-progress-fill {
+  0% {
+    width: 0%;
+    background-position: 0 0;
+  }
+  100% {
+    width: var(--progress-width, 100%);
+    background-position: 200px 0;
+  }
+}
+
+@keyframes dd-progress-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+/* Notification Animations */
+@keyframes dd-notification-slide-in {
+  0% {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-10px) scale(1.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes dd-notification-attention {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* Micro-Interaction Classes */
+.dd-animate-entrance {
+  animation: dd-signature-entrance 0.8s var(--dd-ease-out-cubic);
+}
+
+.dd-animate-logo {
+  animation: dd-logo-breathe 4s ease-in-out infinite;
+}
+
+.dd-animate-gradient {
+  background-size: 200% 200%;
+  animation: dd-gradient-shift 3s ease infinite;
+}
+
+.dd-btn-animate-press {
+  animation: dd-button-press 0.15s var(--dd-ease-out-cubic);
+}
+
+.dd-btn-animate-glow {
+  animation: dd-button-glow-pulse 2s ease-in-out infinite;
+}
+
+.dd-card-animate-lift {
+  transition: all 0.3s var(--dd-ease-out-cubic);
+}
+
+.dd-card-animate-lift:hover {
+  animation: dd-card-lift 0.3s var(--dd-ease-out-cubic) forwards;
+}
+
+.dd-card-animate-lift:hover .dd-card-content {
+  animation: dd-card-content-reveal 0.4s var(--dd-ease-out-cubic) 0.1s both;
+}
+
+.dd-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(229, 231, 235, 0.2) 0px,
+    rgba(255, 255, 255, 0.5) 40px,
+    rgba(229, 231, 235, 0.2) 80px
+  );
+  background-size: 200px 100%;
+  animation: dd-skeleton-loading 1.5s infinite;
+}
+
+.dd-pulse-animate {
+  animation: dd-pulse-glow 2s ease-in-out infinite;
+}
+
+.dd-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.dd-ripple::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  animation: dd-ripple-effect 0.6s ease-out;
+}
+
+.dd-text-rainbow {
+  animation: dd-text-rainbow 3s linear infinite;
+}
+
+.dd-text-type {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: dd-text-type 2s steps(40, end);
+}
+
+.dd-text-glow {
+  animation: dd-text-glow 2s ease-in-out infinite;
+}
+
+.dd-progress-animated .dd-progress-bar {
+  animation: dd-progress-fill 2s var(--dd-ease-out-cubic);
+  position: relative;
+}
+
+.dd-progress-animated .dd-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: dd-progress-shimmer 2s ease-in-out infinite;
+}
+
+.dd-notification-animate {
+  animation: dd-notification-slide-in 0.5s var(--dd-ease-spring);
+}
+
+.dd-notification-attention {
+  animation: dd-notification-attention 0.5s ease-in-out 3;
+}
+
+/* Stagger Animation System */
+.dd-stagger-container {
+  --stagger-delay: 0.1s;
+}
+
+.dd-stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: dd-stagger-fade-up 0.6s var(--dd-ease-out-cubic) forwards;
+}
+
+.dd-stagger-item:nth-child(1) { animation-delay: calc(var(--stagger-delay) * 1); }
+.dd-stagger-item:nth-child(2) { animation-delay: calc(var(--stagger-delay) * 2); }
+.dd-stagger-item:nth-child(3) { animation-delay: calc(var(--stagger-delay) * 3); }
+.dd-stagger-item:nth-child(4) { animation-delay: calc(var(--stagger-delay) * 4); }
+.dd-stagger-item:nth-child(5) { animation-delay: calc(var(--stagger-delay) * 5); }
+.dd-stagger-item:nth-child(6) { animation-delay: calc(var(--stagger-delay) * 6); }
+
+@keyframes dd-stagger-fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Parallax Scroll Effects */
+.dd-parallax {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.dd-parallax-slow {
+  transform: translate3d(0, calc(var(--scroll-y, 0) * -0.3), 0);
+}
+
+.dd-parallax-fast {
+  transform: translate3d(0, calc(var(--scroll-y, 0) * -0.6), 0);
+}
+
+/* Morphing Shapes */
+@keyframes dd-morph-circle-to-square {
+  0% {
+    border-radius: 50%;
+  }
+  100% {
+    border-radius: 0%;
+  }
+}
+
+@keyframes dd-morph-square-to-circle {
+  0% {
+    border-radius: 0%;
+  }
+  100% {
+    border-radius: 50%;
+  }
+}
+
+.dd-morph-toggle {
+  transition: border-radius 0.6s var(--dd-ease-elastic);
+}
+
+/* Interactive Hover States */
+.dd-hover-lift {
+  transition: transform 0.3s var(--dd-ease-out-cubic);
+}
+
+.dd-hover-lift:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.dd-hover-glow {
+  transition: all 0.3s ease;
+}
+
+.dd-hover-glow:hover {
+  filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.4));
+}
+
+.dd-hover-rotate {
+  transition: transform 0.3s var(--dd-ease-out-cubic);
+}
+
+.dd-hover-rotate:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
+/* Focus States with Enhanced Accessibility */
+.dd-focus-ring:focus-visible {
+  outline: 3px solid var(--dd-primary);
+  outline-offset: 2px;
+  border-radius: var(--dd-radius-lg);
+  animation: dd-focus-pulse 1s ease-in-out infinite;
+}
+
+@keyframes dd-focus-pulse {
+  0%, 100% {
+    outline-color: var(--dd-primary);
+  }
+  50% {
+    outline-color: var(--dd-primary-light);
+  }
+}
+
+/* Dark Mode Transition */
+.dd-theme-transition {
+  transition: 
+    background-color 0.5s var(--dd-ease-out-cubic),
+    color 0.5s var(--dd-ease-out-cubic),
+    border-color 0.5s var(--dd-ease-out-cubic),
+    box-shadow 0.5s var(--dd-ease-out-cubic);
+}
+
+/* Seasonal Transition Effects */
+.dd-seasonal-transition {
+  transition: all 1s var(--dd-ease-out-cubic);
+}
+
+.dd-seasonal-transition.dd-spring {
+  animation: dd-spring-bloom 2s var(--dd-ease-spring);
+}
+
+.dd-seasonal-transition.dd-summer {
+  animation: dd-summer-glow 2s ease-in-out;
+}
+
+.dd-seasonal-transition.dd-autumn {
+  animation: dd-autumn-drift 2s ease-out;
+}
+
+.dd-seasonal-transition.dd-winter {
+  animation: dd-winter-frost 2s ease-in-out;
+}
+
+@keyframes dd-spring-bloom {
+  0% {
+    transform: scale(0.9);
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: hue-rotate(10deg) brightness(1.1);
+  }
+  100% {
+    transform: scale(1);
+    filter: hue-rotate(0deg) brightness(1);
+  }
+}
+
+@keyframes dd-summer-glow {
+  0%, 100% {
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    filter: brightness(1.1) saturate(1.2);
+  }
+}
+
+@keyframes dd-autumn-drift {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(2px) rotate(1deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@keyframes dd-winter-frost {
+  0%, 100% {
+    filter: blur(0px) brightness(1);
+  }
+  50% {
+    filter: blur(0.5px) brightness(1.1);
+  }
+}
+
+/* Performance Optimization */
+.dd-will-change {
+  will-change: transform, opacity, filter;
+}
+
+.dd-gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Reduced Motion Respect */
+@media (prefers-reduced-motion: reduce) {
+  .dd-animate-entrance,
+  .dd-animate-logo,
+  .dd-animate-gradient,
+  .dd-btn-animate-glow,
+  .dd-pulse-animate,
+  .dd-text-rainbow,
+  .dd-text-glow,
+  .dd-progress-animated .dd-progress-bar::after,
+  .dd-seasonal-transition {
+    animation: none !important;
+  }
+  
+  .dd-card-animate-lift,
+  .dd-hover-lift,
+  .dd-hover-rotate,
+  .dd-morph-toggle {
+    transition: none !important;
+  }
+  
+  .dd-parallax-slow,
+  .dd-parallax-fast {
+    transform: none !important;
+  }
+}
+
+/* Print-Friendly Animation Disable */
+@media print {
+  * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
