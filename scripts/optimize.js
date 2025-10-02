@@ -72,6 +72,22 @@ class PerformanceOptimizer {
                 console.warn(`⚠️  Could not copy ${file}:`, error.message);
             }
         }
+
+        // Copy HTML files from public folder
+        try {
+            const publicDir = './public';
+            const publicFiles = await fs.readdir(publicDir);
+            
+            for (const file of publicFiles) {
+                if (file.endsWith('.html')) {
+                    const content = await fs.readFile(path.join(publicDir, file), 'utf8');
+                    await fs.writeFile(path.join(this.distDir, file), content);
+                    console.log(`📄 Copied public/${file}`);
+                }
+            }
+        } catch (error) {
+            console.warn(`⚠️  Could not copy public HTML files:`, error.message);
+        }
     }
 
     async processHTML() {
