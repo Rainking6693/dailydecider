@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "dev": "live-server --port=3000 --host=localhost",
-    "build": "npm run optimize && npm run minify",
+    "build": "npm run optimize && npm run minify && npm run copy-public",
+    "copy-public": "cp -r public/* dist/ || xcopy public dist\\ /E /I /Y",
     "optimize": "node scripts/optimize.js",
     "minify": "echo 'JavaScript already minified during optimization'",
     "deploy": "netlify deploy --prod --dir=dist",
